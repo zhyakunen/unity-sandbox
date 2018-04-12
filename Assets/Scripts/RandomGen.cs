@@ -6,8 +6,9 @@ public class RandomGen : MonoBehaviour {
 
 
     public GameObject genObject;
-    [Range(0,1000)]public float width, height;
-    [Range(1, 10)] public float intvFrom, intvTo;
+    [Range(0,20)]public float width, height;
+    [Range(0, 10)] public float intvFrom, intvTo;
+    [Range(0, 10)] public float sizeFrom, sizeTo;
 
     private System.Random random;
     private float wait;
@@ -28,7 +29,8 @@ public class RandomGen : MonoBehaviour {
         if (wait <= 0f)
         {
             Debug.Log("beep");
-            Instantiate(genObject,GenVector(), Quaternion.identity); 
+            Slime s = Instantiate(genObject,GenVector(), Quaternion.identity).GetComponent<Slime>();
+            s.Size = Mathf.Lerp(sizeFrom, sizeTo, (float)random.NextDouble());
             wait += CalcWait();
         }
               

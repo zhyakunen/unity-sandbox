@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SlimeBang : MonoBehaviour {
 
-    static float forceMulti = 1f;
+    static float forceMulti = 0.5f;
     static float slimeMulti = 4f;
-    static float size = 0.1f;
+    static float size = 0.2f;
     public GameObject bangObject;
 
 	// Use this for initialization
@@ -19,11 +19,12 @@ public class SlimeBang : MonoBehaviour {
 	}
 
     public void bang(float s) {
-        float f = s * forceMulti;
-        for (int i = 0; i <= s*slimeMulti; i++) {
-            Vector3 offset = Random.insideUnitSphere*size;
+        float f = s * s * forceMulti;
+        Handheld.Vibrate();
+        for (int i = 0; i <= s*s*slimeMulti; i++) {
+            Vector3 offset = Random.insideUnitSphere*size*s;
             Rigidbody2D r2d = Instantiate(bangObject, transform.position + offset, Quaternion.identity).GetComponent<Rigidbody2D>();
-            r2d.AddExplosionForce(f, transform.position, 2f);
+            r2d.AddExplosionForce(f, transform.position, f);
 
         }
         Destroy(gameObject, 1f);

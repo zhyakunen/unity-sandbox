@@ -19,7 +19,7 @@ public static class Rigidbody2DExtension
         body.AddForce(baseForce, ForceMode2D.Impulse);
 
         float upliftWearoff = 1 - upliftModifier / explosionRadius;
-        Vector3 upliftForce = Vector2.up * explosionForce * upliftWearoff;
+        Vector3 upliftForce = Vector2.up * upliftModifier;
         body.AddForce(upliftForce, ForceMode2D.Impulse);
     }
 }
