@@ -28,7 +28,7 @@ public class RandomGen : MonoBehaviour {
         wait -= Time.fixedDeltaTime;
         if (wait <= 0f)
         {
-            Debug.Log("beep");
+            //Debug.Log("beep");
             Slime s = Instantiate(genObject,GenVector(), Quaternion.identity).GetComponent<Slime>();
             s.Size = Mathf.Lerp(sizeFrom, sizeTo, (float)random.NextDouble());
             wait += CalcWait();

@@ -6,6 +6,11 @@ public class TouchBall : MonoBehaviour {
 
     public Vector3 velocity;
     public TouchPhase phase;
+    public int fingerId;
+    public float Size {
+        set { gameObject.transform.localScale = new Vector3(value, value, value); }
+    }
+
 
 	// Use this for initialization
 	void Start () {
@@ -20,21 +25,21 @@ public class TouchBall : MonoBehaviour {
     {
             
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if(phase==TouchPhase.Began) collision.gameObject.SendMessage("OnPressed", this);    
+        if(phase==TouchPhase.Began) collision.attachedRigidbody.gameObject.SendMessage("OnPressed", this);    
     }
 
-    void OnCollisionStay2D(Collision2D collision)
-    {
+    void OnTriggerStay2D(Collider2D collision)
+    { 
         if (phase == TouchPhase.Canceled || phase == TouchPhase.Ended)
-            collision.gameObject.SendMessage("OnReleased", this);
+            collision.attachedRigidbody.gameObject.SendMessage("OnReleased", this);
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
-        collision.gameObject.SendMessage("OnReleased", this);
+        collision.attachedRigidbody.gameObject.SendMessage("OnReleased", this);
     }
 
 }

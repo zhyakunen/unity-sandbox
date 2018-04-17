@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlimeBang : MonoBehaviour {
 
     static float forceMulti = 0.5f;
-    static float slimeMulti = 4f;
+    static float slimeMulti = 2f;
     static float size = 0.2f;
     public GameObject bangObject;
 
@@ -20,13 +20,13 @@ public class SlimeBang : MonoBehaviour {
 
     public void bang(float s) {
         float f = s * s * forceMulti;
-        Handheld.Vibrate();
+        //Handheld.Vibrate();
         for (int i = 0; i <= s*s*slimeMulti; i++) {
             Vector3 offset = Random.insideUnitSphere*size*s;
             Rigidbody2D r2d = Instantiate(bangObject, transform.position + offset, Quaternion.identity).GetComponent<Rigidbody2D>();
             r2d.AddExplosionForce(f, transform.position, f);
 
         }
-        Destroy(gameObject, 1f);
+        Destroy(gameObject);
     }
 }
