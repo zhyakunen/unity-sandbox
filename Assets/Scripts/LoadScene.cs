@@ -10,4 +10,8 @@ public class LoadScene : MonoBehaviour {
         loadingScreen.active = true;
         Application.LoadLevel(level);
     }
+
+    public void QuitGame() {
+        Application.Quit();
+    }
 }
