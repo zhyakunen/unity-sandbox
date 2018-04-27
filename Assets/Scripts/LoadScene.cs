@@ -13,5 +13,6 @@ public class LoadScene : MonoBehaviour {
 
     public void QuitGame() {
         Application.Quit();
+        return;
     }
 }
