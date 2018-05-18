@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿/**
+ * Create by Tang Shu Yan
+ * 
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,14 +20,25 @@ public class TouchContral : MonoBehaviour {
     void Start () {
         touchBalls = new Dictionary<int, TouchBall>();
         screenRatio = 0f;
-        Input.gyro.enabled = true;
-	}
+
+        if (SystemInfo.supportsGyroscope)
+        {
+            Input.gyro.enabled = true;
+        }
+        else
+        {
+            Input.gyro.enabled = false;
+            Physics2D.gravity = new Vector2(0f, -9.8f);
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
         screenRatio = mainCam.orthographicSize / Screen.height;
-        Physics2D.gravity = new Vector2(Input.gyro.gravity.x*9.8f, Input.gyro.gravity.y*9.8f);
-
+        if(Input.gyro.enabled)
+            Physics2D.gravity = new Vector2(Input.gyro.gravity.x*9.8f, Input.gyro.gravity.y*9.8f);
+                    
         for (var i = 0; i < Input.touchCount; i++) {
             Touch t = Input.GetTouch(i);
             
